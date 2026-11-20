@@ -1,0 +1,111 @@
+SAMS Compass - حالة توثيق المرتبات: 0 من 89
+المفتاح (للاستخدام في data/sources.js) | الحالة | الوظيفة | المرتب
+
+# نظم المعلومات الإدارية
+dataanalyst | تقدير تحريري | محلل بيانات Data Analyst | 10–20 ألف مبتدئ · 40–70 ألف سينيور
+bipowerbideveloper | تقدير تحريري | مطور ذكاء أعمال BI / Power BI Developer | 16–30 ألف مبتدئ · 50–90 ألف سينيور
+businesssystemsanalyst | تقدير تحريري | محلل أعمال ونظم Business & Systems Analyst | 12–20 ألف مبتدئ · 35–65 ألف سينيور
+erpimplementationconsultant | تقدير تحريري | استشاري نظم المؤسسات وتطبيق الأنظمة ERP & Implementation Consultant | 14–25 ألف مبتدئ · 45–95 ألف سينيور
+productowneritprojectmanager | تقدير تحريري | مسؤول منتج ومدير مشروعات تقنية Product Owner / IT Project Manager | 17–30 ألف مبتدئ · 55–110 ألف سينيور
+misofficer | تقدير تحريري | أخصائي نظم معلومات إدارية MIS Officer | 10–18 ألف مبتدئ · 35–70 ألف مدير
+itauditordatagovernance | تقدير تحريري | مدقق نظم وحوكمة بيانات IT Auditor & Data Governance | 14–25 ألف مبتدئ · 45–90 ألف سينيور
+uiuxdesigner | تقدير تحريري | مصمم تجربة وواجهات المستخدم UI/UX Designer | 12–20 ألف مبتدئ · 40–75 ألف سينيور
+lowcodewebpowerplatform | تقدير تحريري | مطور تطبيقات ويب وحلول Low-Code (Web & Power Platform) | 12–25 ألف مبتدئ · 45–90 ألف سينيور
+qasoftwaretester | تقدير تحريري | مختبر جودة برمجيات QA & Software Tester | 9–17 ألف مبتدئ · 35–65 ألف سينيور
+cybersecurityanalyst | تقدير تحريري | محلل أمن سيبراني Cybersecurity Analyst | 14–25 ألف مبتدئ · 45–100 ألف سينيور
+dbasystemsadmin | تقدير تحريري | مدير قواعد بيانات ونظم DBA & Systems Admin | 12–20 ألف مبتدئ · 40–70 ألف سينيور
+
+# المحاسبة
+محاسبعاممالي | تقدير تحريري | محاسب عام / مالي | 9–17 ألف مبتدئ · 30–50 ألف مدير حسابات
+costaccountant | تقدير تحريري | محاسب تكاليف Cost Accountant | 10–18 ألف مبتدئ · 35–65 ألف مدير
+taxaccountant | تقدير تحريري | محاسب ضرائب Tax Accountant | 10–18 ألف مبتدئ · 35–70 ألف مدير
+internalauditor | تقدير تحريري | مراجع داخلي Internal Auditor | 12–20 ألف مبتدئ · 40–75 ألف مدير
+externalauditor | تقدير تحريري | مراجع خارجي External Auditor | 10–19 ألف مبتدئ · 40–85 ألف مدير
+governmentaccountant | تقدير تحريري | محاسب حكومي Government Accountant | 9–14 ألف مبتدئ · 25–45 ألف مدير
+fpaanalyst | تقدير تحريري | محلل مالي FP&A Analyst | 13–25 ألف مبتدئ · 45–95 ألف مدير
+erpaccountingconsultant | تقدير تحريري | مستشار نظم محاسبية ERP Accounting Consultant | 12–20 ألف مبتدئ · 40–90 ألف سينيور
+remotebookkeeper | تقدير تحريري | محاسب ريموت Remote Bookkeeper | 9–17 ألف مبتدئ · 35–70 ألف مع الخبرة
+forensicaccountant | تقدير تحريري | محاسب جنائي Forensic Accountant | 13–25 ألف مبتدئ · 45–100 ألف مدير
+treasuryofficer | تقدير تحريري | أخصائي خزينة Treasury Officer | 10–19 ألف مبتدئ · 40–80 ألف مدير
+projectaccountant | تقدير تحريري | محاسب مشروعات ومقاولات Project Accountant | 10–19 ألف مبتدئ · 35–70 ألف مدير
+ifrsfinancialreporting | تقدير تحريري | أخصائي تقارير مالية IFRS Financial Reporting | 12–20 ألف مبتدئ · 45–90 ألف مدير
+
+# إدارة الموارد البشرية
+recruiter | تقدير تحريري | أخصائي توظيف Recruiter | 9–16 ألف مبتدئ · 30–50 ألف مدير
+hrgeneralist | تقدير تحريري | أخصائي شئون عاملين / HR Generalist | 9–17 ألف مبتدئ · 35–65 ألف مدير
+payrollbenefits | تقدير تحريري | أخصائي رواتب ومزايا Payroll & Benefits | 9–17 ألف مبتدئ · 30–55 ألف مدير
+ldspecialist | تقدير تحريري | مسؤول تدريب وتطوير L&D Specialist | 9–17 ألف مبتدئ · 35–70 ألف مدير
+hranalytics | تقدير تحريري | محلل موارد بشرية HR Analytics | 13–20 ألف مبتدئ · 45–85 ألف سينيور
+techrecruiter | تقدير تحريري | أخصائي توظيف تقني Tech Recruiter | 10–19 ألف + عمولات · 35–70 ألف مدير
+employeerelations | تقدير تحريري | أخصائي علاقات عمل Employee Relations | 10–18 ألف مبتدئ · 35–65 ألف مدير
+employeeexperience | تقدير تحريري | أخصائي تجربة الموظف Employee Experience | 10–19 ألف مبتدئ · 35–75 ألف مدير
+odconsultant | تقدير تحريري | مستشار تطوير تنظيمي OD Consultant | 13–25 ألف مبتدئ · 45–100 ألف مستشار
+hrisspecialist | تقدير تحريري | أخصائي نظم موارد بشرية HRIS Specialist | 12–20 ألف مبتدئ · 40–80 ألف مدير
+employerbranding | تقدير تحريري | أخصائي علامة صاحب العمل Employer Branding | 9–17 ألف مبتدئ · 30–65 ألف مدير
+
+# الإدارة العامة والمحلية
+موظفحكوميإدارةمحلية | تقدير تحريري | موظف حكومي / إدارة محلية | 8–12 ألف مبتدئ · 18–35 ألف قيادي
+policyanalyst | تقدير تحريري | محلل سياسات عامة Policy Analyst | 9–17 ألف مبتدئ · 30–65 ألف مدير
+egovernment | تقدير تحريري | أخصائي حكومة إلكترونية e-Government | 10–18 ألف مبتدئ · 35–70 ألف مدير
+csr | تقدير تحريري | أخصائي مسؤولية مجتمعية CSR | 9–17 ألف مبتدئ · 30–65 ألف مدير
+publicprocurement | تقدير تحريري | أخصائي مشتريات حكومية Public Procurement | 9–17 ألف مبتدئ · 30–55 ألف مدير
+publicbudgetanalyst | تقدير تحريري | محلل ميزانية عامة Public Budget Analyst | 10–18 ألف مبتدئ · 30–65 ألف مدير
+publicprojectmanager | تقدير تحريري | مدير مشروعات عامة Public Project Manager | 10–19 ألف مبتدئ · 35–75 ألف مدير
+localgovernmentofficer | تقدير تحريري | أخصائي إدارة محلية Local Government Officer | 9–14 ألف مبتدئ · 25–45 ألف مدير
+qualityinstitutionaldevelopment | تقدير تحريري | أخصائي جودة وتطوير مؤسسي Quality & Institutional Development | 10–18 ألف مبتدئ · 35–70 ألف مدير
+ngoprogramofficer | تقدير تحريري | منسق برامج منظمات مجتمع مدني NGO Program Officer | 9–18 ألف مبتدئ · 35–80 ألف مدير
+profficer | تقدير تحريري | أخصائي علاقات عامة وإعلام PR Officer | 9–17 ألف مبتدئ · 30–70 ألف مدير
+mespecialist | تقدير تحريري | أخصائي متابعة وتقييم M&E Specialist | 10–19 ألف مبتدئ · 35–75 ألف مدير
+governmentdataanalyst | تقدير تحريري | محلل بيانات حكومية Government Data Analyst | 10–18 ألف مبتدئ · 35–70 ألف مدير
+
+# إدارة الأعمال – إدارة البنوك
+relationshipofficer | تقدير تحريري | موظف خدمة عملاء وعلاقات Relationship Officer | 12–19 ألف مبتدئ · 35–65 ألف مدير فرع
+creditriskanalyst | تقدير تحريري | محلل ائتمان / مخاطر Credit & Risk Analyst | 14–25 ألف مبتدئ · 45–80 ألف سينيور
+bankingoperations | تقدير تحريري | أخصائي عمليات بنكية Banking Operations | 10–17 ألف مبتدئ · 30–55 ألف مدير
+amlcompliance | تقدير تحريري | مسؤول امتثال ومكافحة غسل أموال AML Compliance | 13–20 ألف مبتدئ · 45–85 ألف مدير
+corporatebanker | تقدير تحريري | أخصائي تمويل شركات Corporate Banker | 14–25 ألف مبتدئ · 50–95 ألف مدير
+digitalbankingfintechofficer | تقدير تحريري | أخصائي بنوك رقمية وتكنولوجيا مالية Digital Banking & FinTech Officer | 13–22 ألف مبتدئ · 45–85 ألف مدير
+banktreasurydealer | تقدير تحريري | متداول خزينة بنكية Bank Treasury Dealer | 14–24 ألف مبتدئ · 50–95 ألف مدير
+
+# إدارة الأعمال – التمويل والاستثمار
+financialanalyst | تقدير تحريري | محلل مالي Financial Analyst | 14–25 ألف مبتدئ · 45–85 ألف سينيور
+investmentanalyst | تقدير تحريري | محلل استثمار / سمسار Investment Analyst | 12–20 ألف مبتدئ · 40–90 ألف سينيور
+wealthmanager | تقدير تحريري | مدير ثروات وأصول Wealth Manager | 14–25 ألف + عمولات · 45–100 ألف سينيور
+investorrelations | تقدير تحريري | مسؤول علاقات مستثمرين Investor Relations | 15–25 ألف مبتدئ · 50–100 ألف مدير
+vcanalyst | تقدير تحريري | محلل ستارت أب / رأس مال جريء VC Analyst | 12–20 ألف مبتدئ · 45–110 ألف شريك
+equityresearchanalyst | تقدير تحريري | محلل أسهم Equity Research Analyst | 12–22 ألف مبتدئ · 45–90 ألف سينيور
+financialriskofficer | تقدير تحريري | أخصائي مخاطر مالية Financial Risk Officer | 13–24 ألف مبتدئ · 45–90 ألف مدير
+
+# إدارة الأعمال – التسويق والتجارة الإلكترونية
+digitalmarketer | تقدير تحريري | أخصائي تسويق رقمي Digital Marketer | 9–18 ألف مبتدئ · 35–70 ألف مدير
+businessdevelopment | تقدير تحريري | مدير مبيعات / تطوير أعمال Business Development | 10–18 ألف مبتدئ · 40–80 ألف مدير
+contentmanager | تقدير تحريري | صانع محتوى ومدير محتوى Content Manager | 9–16 ألف مبتدئ · 30–55 ألف مدير
+ecommercemanager | تقدير تحريري | مدير متجر إلكتروني E-commerce Manager | 12–20 ألف مبتدئ · 40–80 ألف مدير
+brandmarketresearch | تقدير تحريري | باحث سوق ومدير علامة Brand & Market Research | 10–18 ألف مبتدئ · 40–85 ألف مدير
+paidadsspecialist | تقدير تحريري | أخصائي إعلانات مدفوعة Paid Ads Specialist | 9–18 ألف مبتدئ · 35–70 ألف مدير
+seoseomarketinganalytics | تقدير تحريري | أخصائي SEO وتحليلات تسويق SEO & Marketing Analytics | 10–19 ألف مبتدئ · 38–75 ألف مدير
+
+# الاقتصاد
+economicresearcher | تقدير تحريري | باحث ومحلل اقتصادي Economic Researcher | 10–18 ألف مبتدئ · 35–65 ألف سينيور
+feasibilityanalyst | تقدير تحريري | أخصائي دراسات جدوى Feasibility Analyst | 10–18 ألف مبتدئ · 35–55 ألف مدير
+economicdataanalyst | تقدير تحريري | محلل بيانات اقتصادية Economic Data Analyst | 12–20 ألف مبتدئ · 40–75 ألف سينيور
+policyinvestmentanalyst | تقدير تحريري | محلل سياسات واستثمار Policy & Investment Analyst | 10–19 ألف مبتدئ · 35–70 ألف مدير
+developmentconsultant | تقدير تحريري | مستشار مشروعات تنمية Development Consultant | 10–18 ألف مبتدئ · 40–90 ألف مستشار
+macroanalyst | تقدير تحريري | محلل اقتصاد كلي Macro Analyst | 11–20 ألف مبتدئ · 40–80 ألف سينيور
+pricingcompetitionanalyst | تقدير تحريري | محلل تسعير ومنافسة Pricing & Competition Analyst | 11–20 ألف مبتدئ · 38–75 ألف مدير
+
+# العلوم الاكتوارية
+actuarialanalyst | تقدير تحريري | أكتواري Actuarial Analyst | 14–25 ألف مبتدئ · 55–110 ألف سينيور
+insuranceriskanalyst | تقدير تحريري | محلل مخاطر تأمين Insurance Risk Analyst | 12–20 ألف مبتدئ · 40–75 ألف سينيور
+insurancedataanalyst | تقدير تحريري | أكتواري بيانات تأمين Insurance Data Analyst | 13–25 ألف مبتدئ · 45–90 ألف سينيور
+pensionanalyst | تقدير تحريري | أخصائي معاشات وتأمينات اجتماعية Pension Analyst | 10–19 ألف مبتدئ · 35–70 ألف مدير
+ermanalyst | تقدير تحريري | مدير مخاطر مؤسسية ERM Analyst | 13–25 ألف مبتدئ · 45–95 ألف مدير
+pricingactuary | تقدير تحريري | أكتواري تسعير Pricing Actuary | 14–26 ألف مبتدئ · 55–110 ألف سينيور
+reservinganalyst | تقدير تحريري | محلل احتياطيات تأمين Reserving Analyst | 13–24 ألف مبتدئ · 50–100 ألف سينيور
+
+# إدارة الأعمال – المنشآت البترولية والطاقة
+energyadminfinanceofficer | تقدير تحريري | إداري ومالي في شركة بترول وطاقة Energy Admin & Finance Officer | 14–25 ألف مبتدئ · 45–90 ألف مدير
+energyanalyst | تقدير تحريري | محلل اقتصاد الطاقة Energy Analyst | 14–25 ألف مبتدئ · 40–75 ألف سينيور
+procurementcontracts | تقدير تحريري | مسؤول مشتريات وعقود طاقة Procurement & Contracts | 13–20 ألف مبتدئ · 45–85 ألف مدير
+renewableprojectscoordinator | تقدير تحريري | مسؤول طاقة متجددة ومشروعات Renewable Projects Coordinator | 13–25 ألف مبتدئ · 45–95 ألف مدير
+hseofficer | تقدير تحريري | مسؤول سلامة وبيئة وجودة HSE Officer | 12–20 ألف مبتدئ · 40–80 ألف مدير
