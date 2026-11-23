@@ -18,10 +18,10 @@ _route();_ready=true;
   const GAP=34, R=230;                       // dot spacing / cursor influence radius
   const mouse={x:-9999,y:-9999,sx:-9999,sy:-9999,on:false,v:0};
   const ripples=[];                          // click / tap waves
-  const TEAL=[45,212,191], AMBER=[251,191,36];
-  const orbs=[ {x:.18,y:.22,r:.42,c:'20,184,166',a:.13,s:.00006,p:0},
-               {x:.82,y:.30,r:.36,c:'251,191,36',a:.07,s:.00008,p:2},
-               {x:.55,y:.88,r:.46,c:'20,184,166',a:.09,s:.00005,p:4} ];
+  const TEAL=[59,130,246], AMBER=[56,189,248];
+  const orbs=[ {x:.18,y:.22,r:.42,c:'59,130,246',a:.13,s:.00006,p:0},
+               {x:.82,y:.30,r:.36,c:'56,189,248',a:.07,s:.00008,p:2},
+               {x:.55,y:.88,r:.46,c:'59,130,246',a:.09,s:.00005,p:4} ];
   const mix=(a,b,k)=>`rgb(${a[0]+(b[0]-a[0])*k|0},${a[1]+(b[1]-a[1])*k|0},${a[2]+(b[2]-a[2])*k|0})`;
 
   function resize(){
@@ -48,7 +48,7 @@ _route();_ready=true;
     // 2) spotlight following the cursor
     if(mouse.on){
       const g=ctx.createRadialGradient(mouse.sx,mouse.sy,0,mouse.sx,mouse.sy,R*1.5);
-      g.addColorStop(0,'rgba(45,212,191,.16)'); g.addColorStop(.5,'rgba(45,212,191,.05)'); g.addColorStop(1,'rgba(45,212,191,0)');
+      g.addColorStop(0,'rgba(59,130,246,.16)'); g.addColorStop(.5,'rgba(59,130,246,.05)'); g.addColorStop(1,'rgba(59,130,246,0)');
       ctx.fillStyle=g; ctx.fillRect(mouse.sx-R*1.5,mouse.sy-R*1.5,R*3,R*3);
     }
 
