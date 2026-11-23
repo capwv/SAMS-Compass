@@ -2,6 +2,7 @@
   "name": "Platforms & Tools",
   "short_name": "Platforms & Tools",
   "description": "SQL From Zero وPython From Zero وExcel From Zero وPower BI From Zero، وأداة SIRA للسيرة الذاتية وMIS Summaries، في مكان واحد.",
+  "id": "./platforms.html",
   "start_url": "./platforms.html",
   "scope": "./",
   "display": "standalone",
