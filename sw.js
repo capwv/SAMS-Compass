@@ -1,11 +1,12 @@
 /* SAMS Compass service worker: offline support + PWA installability.
    Pages: network-first (fresh content, cache fallback offline).
    Same-origin assets: cache-first with background refresh. */
-var CACHE = 'sams-compass-v12-1';
+var CACHE = 'sams-compass-v13-hub';
 
 var CORE = [
   './',
   'index.html',
+  'platforms.html',
   'site.webmanifest',
   'assets/style.css',
   'assets/fonts.css',
