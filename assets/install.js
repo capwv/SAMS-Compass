@@ -63,11 +63,13 @@
       if (deferredPrompt) {
         var p = deferredPrompt;
         deferredPrompt = null;
-        p.prompt();
-        p.userChoice.then(function (choice) {
-          if (choice.outcome === 'accepted') { btn.hidden = true; if (hint) hint.hidden = true; }
-          else showHelp();
-        });
+        try {
+          p.prompt();
+          p.userChoice.then(function (choice) {
+            if (choice.outcome === 'accepted') { btn.hidden = true; if (hint) hint.hidden = true; }
+            else showHelp();
+          });
+        } catch (err) { showHelp(); }
       } else {
         showHelp();
       }
