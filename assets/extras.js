@@ -230,7 +230,7 @@
     var small = matchMedia('(max-width:768px)').matches;
     var W = 0, H = 0, dpr = 1, raf = 0, cells = [], last = 0;
     var mouse = { x: -9999, y: -9999, on: false };
-    var TEAL = '45,212,191', AMBER = '251,191,36';
+    var TEAL = '59,130,246', AMBER = '56,189,248';
     var LINK = small ? 110 : 140, MR = small ? 130 : 170;
 
     function make(n) {
@@ -288,7 +288,7 @@
           if (dx > LINK || dx < -LINK || dy > LINK || dy < -LINK) continue;
           d = Math.hypot(dx, dy);
           if (d < LINK) {
-            ctx.strokeStyle = 'rgba(94,234,212,' + ((1 - d / LINK) * (.16 + Math.max(a.glow, b.glow) * .35)).toFixed(3) + ')';
+            ctx.strokeStyle = 'rgba(122,167,255,' + ((1 - d / LINK) * (.16 + Math.max(a.glow, b.glow) * .35)).toFixed(3) + ')';
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
           }
         }
@@ -296,7 +296,7 @@
         if (mouse.on) {
           dx = a.x - mouse.x; dy = a.y - mouse.y; d = Math.hypot(dx, dy);
           if (d < MR * 1.25) {
-            ctx.strokeStyle = 'rgba(251,191,36,' + ((1 - d / (MR * 1.25)) * .3).toFixed(3) + ')';
+            ctx.strokeStyle = 'rgba(56,189,248,' + ((1 - d / (MR * 1.25)) * .3).toFixed(3) + ')';
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
           }
         }
