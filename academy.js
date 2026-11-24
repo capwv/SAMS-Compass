@@ -12,12 +12,12 @@
   function el(t,a,h){var e=document.createElement(t);for(var k in a||{})e.setAttribute(k,a[k]);if(h!=null)e.innerHTML=h;return e}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   var anon=get(KB);if(!anon){anon=Math.random().toString(36).slice(2)+Date.now().toString(36);put(KB,anon)}
-  var acct=J(get(KA))||null;
+  var acct=J(get(KA))||null;var HUBMODE=(slug==='hub');var gated=false,after=null;
   function saveAcct(a){acct=a;if(a)put(KA,JSON.stringify(a));else del(KA)}
   function rpc(n,a,ka){return fetch(API+n,{method:'POST',keepalive:!!ka,headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(a||{})}).then(function(r){return r.json()}).catch(function(){return{error:'net'}})}
   /* ---------- tracking ---------- */
   var q=[],nClicks=0;
-  function track(type,meta){q.push({type:type,slug:slug,meta:meta||null});if(q.length>=20)flush()}
+  function track(type,meta){if(!acct||HUBMODE)return;q.push({type:type,slug:slug,meta:meta||null});if(q.length>=20)flush()}
   function flush(ka){if(!q.length)return;var b=q.splice(0,30);rpc('app_track',{p_token:acct?acct.token:null,p_anon:anon,p_events:b},ka)}
   setInterval(flush,8000);
   addEventListener('pagehide',function(){flush(true)});
@@ -45,7 +45,7 @@
   function same(a,b){return JSON.stringify(a)===JSON.stringify(b)}
   function norm(sn){var o={p:{},l:sn.l};for(var k in sn.p){var v=J(sn.p[k]);o.p[k]=v?JSON.stringify(v):sn.p[k]}return o}
   var lastPushed='',pushT=0,known=0,pulling=0;
-  function push(force){if(!acct)return;var sn=snap(),s=JSON.stringify(sn);if(!force&&s===lastPushed)return;var st=stats(sn);
+  function push(force){if(!acct||HUBMODE)return;var sn=snap(),s=JSON.stringify(sn);if(!force&&s===lastPushed)return;var st=stats(sn);
     if(st.lessons<known){if(!pulling){pulling=1;pull(function(){pulling=0})}return}
     known=Math.max(known,st.lessons);lastPushed=s;
     rpc('app_save_progress',{p_token:acct.token,p_slug:slug,p_data:s,p_pct:st.pct,p_lessons:st.lessons},force).then(function(r){if(r&&r.error==='auth'){saveAcct(null);lastPushed='';ui()}else if(r&&r.error)lastPushed=''})}
@@ -55,7 +55,7 @@
   addEventListener('pagehide',function(){if(acct)push(true)});
   function pull(cb){if(!acct)return cb&&cb(false);
     rpc('app_get_progress',{p_token:acct.token}).then(function(r){
-      if(r&&r.error==='auth'){saveAcct(null);ui();return cb&&cb(false)}
+      if(r&&r.error==='auth'){saveAcct(null);ui();if(!HUBMODE)lock();return cb&&cb(false)}
       if(!r||r.error)return cb&&cb(false);
       var it=null;(r.items||[]).forEach(function(x){if(x.slug===slug)it=x});
       var rem=it&&J(it.data),loc=snap(),m=merge(loc,rem),changed=false,k;if(it)known=Math.max(known,it.lessons||0);
@@ -81,14 +81,19 @@
   '#iua-am .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}#iua-am .row .b{flex:1;min-width:120px}'+
   '#iua-am .er{color:#fca5a5;font-size:.85rem;margin-top:10px;min-height:1.2em}#iua-am .ok{color:#86efac}#iua-am .ck{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:.88rem;color:#cbd5e1}'+
   '#iua-tst{position:fixed;inset-inline-end:18px;bottom:72px;z-index:9997;max-width:min(300px,80vw);background:#0f1420;border:1px solid #60a5fa;border-radius:14px;padding:12px 14px;color:#e8ecf5;font:600 13px/1.7 Cairo,sans-serif;direction:rtl;box-shadow:0 8px 28px rgba(0,0,0,.5);display:none}'+
-  '#iua-tst button{margin-top:6px;margin-inline-end:6px;padding:6px 12px;border-radius:8px;border:1px solid #334968;background:#17253d;color:#cbd5e1;font:700 12px Cairo,sans-serif;cursor:pointer}#iua-tst .p{background:linear-gradient(135deg,#2563eb,#7c5cff);color:#fff;border-color:#60a5fa}');
+  '#iua-tst button{margin-top:6px;margin-inline-end:6px;padding:6px 12px;border-radius:8px;border:1px solid #334968;background:#17253d;color:#cbd5e1;font:700 12px Cairo,sans-serif;cursor:pointer}#iua-tst .p{background:linear-gradient(135deg,#2563eb,#7c5cff);color:#fff;border-color:#60a5fa}'+
+  'html.iua-lock{overflow:hidden!important}html.iua-lock body>*:not(#iua-am):not(#iua-tst){visibility:hidden!important}#iua-am.gate{background:radial-gradient(1100px 560px at 50% -8%,#18294f 0%,#070a14 72%)}#iua-am.gate .bx,#iua-am.hub .bx{margin:auto}#iua-am.gate{align-items:flex-start}');
   var btn=el('button',{id:'iua-ab',type:'button','aria-label':'Account'});
   var am=el('div',{id:'iua-am',role:'dialog','aria-modal':'true'});
   var tst=el('div',{id:'iua-tst'});
   var ERR={bad_username:'اسم المستخدم لازم يكون حروف إنجليزي وأرقام و _ . من ٣ لـ ٢٤ حرف',bad_password:'كلمة السر لازم تكون ٦ حروف على الأقل',taken:'الاسم ده متاخد، جرّب اسم تاني',bad_credentials:'اسم المستخدم أو كلمة السر غلط',locked:'محاولات غلط كتير، جرّب بعد ١٠ دقايق',busy:'الضغط عالي دلوقتي، جرّب كمان شوية',net:'مفيش اتصال بالإنترنت، جرّب تاني',auth:'الجلسة خلصت، سجّل دخول تاني'};
   function ui(){if(acct&&acct.user){btn.className='';btn.setAttribute('class','in');btn.innerHTML='<span>👤</span><b>'+esc(acct.user.name||acct.user.username)+'</b>'}else{btn.removeAttribute('class');btn.innerHTML='<span>💾</span><b>احفظ تقدمك · سجّل</b>'}}
   function open(tab){track('auth_open',{tab:tab||'x'});am.style.display='flex';draw(tab||(acct?'me':'in'))}
-  function shut(){am.style.display='none'}
+  function lock(){if(isG())return;gated=true;document.documentElement.classList.add('iua-lock');am.className='gate';am.style.display='flex';draw('up')}
+  function unlock(){gated=false;document.documentElement.classList.remove('iua-lock');am.className=''}
+  function isG(){try{return sessionStorage.getItem('iua-guest')==='1'}catch(e){return false}}
+  function guest(){try{sessionStorage.setItem('iua-guest','1')}catch(e){}unlock();am.style.display='none';if(after){var hh=after;after=null;location.href=hh}}
+  function shut(){if(gated)return;am.style.display='none'}
   function msg(t,ok){var e=am.querySelector('.er');if(e){e.textContent=t||'';e.className='er'+(ok?' ok':'')}}
   function draw(tab){
     if(tab==='me'&&acct){var u=acct.user;
@@ -102,7 +107,7 @@
       am.querySelector('#iua-cp').onclick=function(){rpc('app_change_password',{p_token:acct.token,p_old:am.querySelector('#iua-op').value,p_new:am.querySelector('#iua-np').value}).then(function(r){msg(r.ok?'تم تغيير كلمة السر ✓':(ERR[r.error]||'حصل خطأ'),r.ok)})};
       am.querySelector('#iua-lo').onclick=function(){push(true);rpc('app_logout',{p_token:acct.token},true);var sn=snap();for(var k in sn.p)del(k);for(var k2 in sn.l)del(k2);saveAcct(null);setTimeout(function(){location.reload()},250)};
     }else{var reg=tab==='up';
-      am.innerHTML='<div class="bx"><h3>'+(reg?'🎓 اعمل حساب جديد':'👋 أهلاً بيك تاني')+'</h3><p class="s">حسابك بيحفظ تقدمك على السيرفر، فمهما مسحت المتصفح أو غيّرت الجهاز تكمل من مكانك. اسمك بيظهر في لوحة المتصدرين وتقدر تخفيه.</p>'+
+      am.innerHTML='<div class="bx"><h3>'+(reg?'🎓 اعمل حساب جديد':'👋 أهلاً بيك تاني')+'</h3><p class="s">'+((gated||after)?'<b style="color:#fff">لازم تسجّل الأول عشان تدخل الأكاديمية.</b><br>':'')+'حسابك بيحفظ تقدمك على السيرفر، فمهما مسحت المتصفح أو غيّرت الجهاز تكمل من مكانك. اسمك بيظهر في لوحة المتصدرين وتقدر تخفيه.</p>'+
       '<div class="tabs"><button class="b'+(reg?'':' on')+'" data-t="in" type="button">دخول</button><button class="b'+(reg?' on':'')+'" data-t="up" type="button">حساب جديد</button></div>'+
       '<label>اسم المستخدم</label><input type="text" class="l" id="iua-un" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="24" placeholder="username">'+
       (reg?'<label>الاسم اللي يظهر للناس (اختياري)</label><input type="text" id="iua-dn" maxlength="30" autocomplete="name">':'')+
@@ -111,19 +116,20 @@
       var tb=am.querySelectorAll('.tabs button');for(var i=0;i<tb.length;i++)tb[i].onclick=function(){draw(this.getAttribute('data-t'))};
       var go=function(){var u=am.querySelector('#iua-un').value,p=am.querySelector('#iua-pw').value,d=reg?am.querySelector('#iua-dn').value:null;msg('...',1);
         rpc(reg?'app_register':'app_login',reg?{p_username:u,p_password:p,p_display:d}:{p_username:u,p_password:p}).then(function(r){
-          if(r.token){saveAcct({token:r.token,user:r.user});ui();msg('تم ✓ بنحمّل تقدمك...',1);lastPushed='';pull(function(){shut();toast(reg?'تم إنشاء حسابك 🎉 تقدمك بيتحفظ تلقائي':'أهلاً '+esc(r.user.name||r.user.username)+' 👋 تقدمك اتحمّل',1500)})}else msg(ERR[r.error]||'حصل خطأ')})};
+          if(r.token){saveAcct({token:r.token,user:r.user});ui();msg('تم ✓ بنحمّل تقدمك...',1);lastPushed='';(HUBMODE?function(f){f(true)}:pull)(function(){unlock();shut();if(after){var hh=after;after=null;location.href=hh;return}track('view',{ref:'gate'});toast(reg?'تم إنشاء حسابك 🎉 تقدمك بيتحفظ تلقائي':'أهلاً '+esc(r.user.name||r.user.username)+' 👋 تقدمك اتحمّل',1500)})}else msg(ERR[r.error]||'حصل خطأ')})};
       am.querySelector('#iua-go').onclick=go;am.querySelector('#iua-pw').onkeydown=function(e){if(e.key==='Enter')go()};
       setTimeout(function(){var f=am.querySelector('#iua-un');if(f)f.focus()},50)}
-    am.querySelector('#iua-x').onclick=shut}
+    var xb=am.querySelector('#iua-x');xb.onclick=function(){after=null;shut()};if(gated||after){xb.textContent='كمّل كضيف 👀';xb.onclick=guest}}
   function toast(h,ms){tst.innerHTML=h;tst.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(function(){tst.style.display='none'},ms||6000)}
-  function nudge(){if(acct||sessionStorage.getItem('iua-nudge'))return;var st=stats(snap());if(st.lessons<1)return;sessionStorage.setItem('iua-nudge','1');
+  function nudge(){if(acct||HUBMODE||gated||sessionStorage.getItem('iua-nudge'))return;var st=stats(snap());if(st.lessons<1)return;sessionStorage.setItem('iua-nudge','1');
     tst.innerHTML='أحسنت! خلصت أول درس 🎉 سجّل حساب عشان تقدمك ما يضيعش وتدخل لوحة المتصدرين.<br><button class="p" id="iua-n1">سجّل دلوقتي</button><button id="iua-n2">بعدين</button>';tst.style.display='block';
     document.getElementById('iua-n1').onclick=function(){tst.style.display='none';open('up')};document.getElementById('iua-n2').onclick=function(){tst.style.display='none'}}
   function mount(){document.head.appendChild(css);document.body.appendChild(btn);document.body.appendChild(am);document.body.appendChild(tst);ui();
     btn.onclick=function(){open()};am.addEventListener('click',function(e){if(e.target===am)shut()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&am.style.display==='flex')shut()});
     track('view',{ref:(document.referrer||'').slice(0,60)});
-    if(acct){rpc('app_me',{p_token:acct.token}).then(function(r){if(r&&r.error==='auth'){saveAcct(null);ui()}else if(r&&r.user){acct.user=r.user;saveAcct(acct);ui();pull()}})}
-    setInterval(nudge,5000);fixCopy()}
+    if(acct){rpc('app_me',{p_token:acct.token}).then(function(r){if(r&&r.error==='auth'){saveAcct(null);ui();if(!HUBMODE)lock()}else if(r&&r.user){acct.user=r.user;saveAcct(acct);ui();if(!HUBMODE)pull()}else if(r&&r.error==='auth'&&false){}})}
+    setInterval(nudge,5000);fixCopy();
+    if(HUBMODE){document.addEventListener('click',function(e){if(acct||isG())return;var a=e.target&&e.target.closest&&e.target.closest('a[href*="-from-zero"]');if(!a)return;e.preventDefault();e.stopPropagation();after=a.href;am.className='hub';am.style.display='flex';draw('up')},true)}else if(!acct)lock()}
   function fixCopy(){var o='تقدمك بيتحفظ لوحده في المتصفح، فممكن تقفل وترجع تكمل من مكانك.',n='سجّل حساب ببلاش وتقدمك يتحفظ على حسابك، فتكمل من مكانك على أي جهاز حتى لو مسحت المتصفح.';var w=document.createTreeWalker(document.body,4),t;while(t=w.nextNode())if(t.nodeValue.indexOf(o)>-1)t.nodeValue=t.nodeValue.replace(o,n)}
   window.__iuaAccount={open:open,track:track};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
