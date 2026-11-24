@@ -41,7 +41,9 @@ h1{font-size:1.6rem;font-weight:800;background:linear-gradient(90deg,#93c5fd,#c4
 <script>
 var API='https://ttbhkelmmnhoohucewda.supabase.co/rest/v1/rpc/app_leaderboard',KEY='sb_publishable_dtIO-b76YDbgp6RNCr_mjA_LZLdc1Z8';
 var C={'sql-from-zero':['SQL','🗄️'],'python-da-from-zero':['Python للتحليل','🐍'],'stats-from-zero':['الإحصاء','📈'],'ml-from-zero':['Machine Learning','🤖'],'javascript-from-zero':['JavaScript','🟨'],'java-from-zero':['Java','☕'],'cpp-from-zero':['C++','⚙️'],'git-from-zero':['Git و GitHub','🌿'],'excel-da-from-zero':['Excel','📗'],'tableau-from-zero':['Tableau','📊'],'powerbi-from-zero':['Power BI','🟡'],'cyber-from-zero':['الأمن السيبراني','🛡️'],'html-css-from-zero':['HTML و CSS','🎨'],'flutter-from-zero':['Flutter','📱']};
-var tab='today',D=null;
+var tab='today',D=null,HM={};
+function nm(n){var u=HM[n];return u?'<a href="profile.html?u='+encodeURIComponent(u)+'" style="color:inherit;text-decoration:none">'+esc(n)+'</a>':esc(n)}
+function loadH(){fetch(API.replace('app_leaderboard','app_profile_handles'),{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:'{}'}).then(function(r){return r.json()}).then(function(a){var c={};HM={};if(!Array.isArray(a))return;a.forEach(function(x){c[x.name]=(c[x.name]||0)+1});a.forEach(function(x){if(c[x.name]===1)HM[x.name]=x.u});if(D)draw()}).catch(function(){})}
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function ar(n){return String(n).replace(/\d/g,function(d){return '٠١٢٣٤٥٦٧٨٩'[d]})}
 function ago(t){var s=Math.max(0,(Date.now()-new Date(t))/1000);if(s<60)return 'دلوقتي';if(s<3600)return 'من '+ar(Math.floor(s/60))+' دقيقة';return 'من '+ar(Math.floor(s/3600))+' ساعة'}
@@ -50,13 +52,13 @@ function draw(){var s=D.stats;
  document.getElementById('stats').innerHTML=[['👥',s.users,'طالب مسجّل'],['🟢',s.active_today,'نشط النهارده'],['✅',s.lessons_today,'درس اتخلص النهارده'],['🎓',s.completions_total,'كورس اتكمّل 100%']].map(function(x){return '<div class="st"><b>'+ar(x[1])+'</b><span>'+x[0]+' '+x[2]+'</span></div>'}).join('');
  var rows=tab==='today'?D.today:D.top;document.getElementById('lt').textContent=tab==='today'?'أكتر ناس اتقدموا النهارده':'الأعلى نقاطًا في كل الأكاديميات';
  var med=['🥇','🥈','🥉'],top=rows.slice(0,3),h='';
- if(top.length){var o=[top[1],top[0],top[2]],cls=['','p1',''],idx=[1,0,2];h='<div class="pod">';o.forEach(function(p,i){if(!p){h+='<div></div>';return}h+='<div class="pd '+cls[i]+'"><div class="m">'+med[idx[i]]+'</div><div class="n">'+esc(p.name)+'</div><div class="x">'+(tab==='today'?ar(p.lessons)+' درس':ar(p.xp)+' نقطة')+'</div></div>'});h+='</div>'}
+ if(top.length){var o=[top[1],top[0],top[2]],cls=['','p1',''],idx=[1,0,2];h='<div class="pod">';o.forEach(function(p,i){if(!p){h+='<div></div>';return}h+='<div class="pd '+cls[i]+'"><div class="m">'+med[idx[i]]+'</div><div class="n">'+nm(p.name)+'</div><div class="x">'+(tab==='today'?ar(p.lessons)+' درس':ar(p.xp)+' نقطة')+'</div></div>'});h+='</div>'}
  document.getElementById('pod').innerHTML=h;
- document.getElementById('list').innerHTML=rows.length?rows.map(function(p,i){return '<div class="r"><span class="k">'+ar(i+1)+'</span><span class="n">'+esc(p.name)+'</span><span class="s">'+(tab==='today'?(p.completed?'🎓 '+ar(p.completed)+' ':''):ar(p.completed)+' كورس · '+ar(p.lessons)+' درس')+'</span><span class="v">'+(tab==='today'?'+'+ar(p.lessons)+' درس':ar(p.xp)+' ⭐')+'</span></div>'}).join(''):'<div class="empty">لسه مفيش نشاط النهارده. كن أول واحد يدخل اللوحة 💪</div>';
+ document.getElementById('list').innerHTML=rows.length?rows.map(function(p,i){return '<div class="r"><span class="k">'+ar(i+1)+'</span><span class="n">'+nm(p.name)+'</span><span class="s">'+(tab==='today'?(p.completed?'🎓 '+ar(p.completed)+' ':''):ar(p.completed)+' كورس · '+ar(p.lessons)+' درس')+'</span><span class="v">'+(tab==='today'?'+'+ar(p.lessons)+' درس':ar(p.xp)+' ⭐')+'</span></div>'}).join(''):'<div class="empty">لسه مفيش نشاط النهارده. كن أول واحد يدخل اللوحة 💪</div>';
  document.getElementById('feed').innerHTML=D.feed.length?D.feed.map(function(f){var c=C[f.slug]||[f.slug,'📘'];var done=f.type==='complete';return '<div class="f'+(done?' c':'')+'"><span class="e">'+(done?'🎓':c[1])+'</span><div class="t">'+(done?'<b>'+esc(f.name)+'</b> خلّص كورس <b>'+esc(c[0])+'</b> 100%':'<b>'+esc(f.name)+'</b> وصل '+ar(f.pct)+'% في '+esc(c[0]))+'<small>'+ago(f.at)+'</small></div></div>'}).join(''):'<div class="empty">النشاط هيظهر هنا لحظة بلحظة</div>';
  document.getElementById('cta').innerHTML='عايز اسمك يبقى هنا؟ افتح أي أكاديمية وسجّل حساب من الزرار اللي تحت. <a href="platforms.html">كل الأكاديميات</a>'}
 document.querySelectorAll('.tabs button').forEach(function(b){b.onclick=function(){tab=b.getAttribute('data-t');document.querySelectorAll('.tabs button').forEach(function(x){x.classList.toggle('on',x===b)});if(D)draw()}});
-load();setInterval(load,30000);
+load();loadH();setInterval(load,30000);setInterval(loadH,120000);
 fetch('https://ttbhkelmmnhoohucewda.supabase.co/rest/v1/rpc/app_track',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({p_token:null,p_anon:(function(){try{var a=localStorage.getItem('iua-anon');if(!a){a=Math.random().toString(36).slice(2);localStorage.setItem('iua-anon',a)}return a}catch(e){return'x'}})(),p_events:[{type:'leaderboard',slug:'leaderboard'}]})}).catch(function(){});
 </script>
 </body>
