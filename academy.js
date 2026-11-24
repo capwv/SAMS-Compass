@@ -123,7 +123,8 @@
     btn.onclick=function(){open()};am.addEventListener('click',function(e){if(e.target===am)shut()});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&am.style.display==='flex')shut()});
     track('view',{ref:(document.referrer||'').slice(0,60)});
     if(acct){rpc('app_me',{p_token:acct.token}).then(function(r){if(r&&r.error==='auth'){saveAcct(null);ui()}else if(r&&r.user){acct.user=r.user;saveAcct(acct);ui();pull()}})}
-    setInterval(nudge,5000)}
+    setInterval(nudge,5000);fixCopy()}
+  function fixCopy(){var o='تقدمك بيتحفظ لوحده في المتصفح، فممكن تقفل وترجع تكمل من مكانك.',n='سجّل حساب ببلاش وتقدمك يتحفظ على حسابك، فتكمل من مكانك على أي جهاز حتى لو مسحت المتصفح.';var w=document.createTreeWalker(document.body,4),t;while(t=w.nextNode())if(t.nodeValue.indexOf(o)>-1)t.nodeValue=t.nodeValue.replace(o,n)}
   window.__iuaAccount={open:open,track:track};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
 })();
