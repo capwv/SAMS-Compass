@@ -82,7 +82,8 @@
   '#iua-am .er{color:#fca5a5;font-size:.85rem;margin-top:10px;min-height:1.2em}#iua-am .ok{color:#86efac}#iua-am .ck{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:.88rem;color:#cbd5e1}'+
   '#iua-tst{position:fixed;inset-inline-end:18px;bottom:72px;z-index:9997;max-width:min(300px,80vw);background:#0f1420;border:1px solid #60a5fa;border-radius:14px;padding:12px 14px;color:#e8ecf5;font:600 13px/1.7 Cairo,sans-serif;direction:rtl;box-shadow:0 8px 28px rgba(0,0,0,.5);display:none}'+
   '#iua-tst button{margin-top:6px;margin-inline-end:6px;padding:6px 12px;border-radius:8px;border:1px solid #334968;background:#17253d;color:#cbd5e1;font:700 12px Cairo,sans-serif;cursor:pointer}#iua-tst .p{background:linear-gradient(135deg,#2563eb,#7c5cff);color:#fff;border-color:#60a5fa}'+
-  'html.iua-lock{overflow:hidden!important}html.iua-lock body>*:not(#iua-am):not(#iua-tst){visibility:hidden!important}#iua-am.gate{background:radial-gradient(1100px 560px at 50% -8%,#18294f 0%,#070a14 72%)}#iua-am.gate .bx,#iua-am.hub .bx{margin:auto}#iua-am.gate{align-items:flex-start}');
+  'html.iua-lock{overflow:hidden!important}html.iua-lock body>*:not(#iua-am):not(#iua-tst){visibility:hidden!important}#iua-am.gate{background:radial-gradient(1100px 560px at 50% -8%,#18294f 0%,#070a14 72%)}#iua-am.gate .bx,#iua-am.hub .bx{margin:auto}#iua-am.gate{align-items:flex-start}'+
+  '.lesson :not(pre)>code,.lesson .note,.lesson .note *{overflow-wrap:anywhere}');
   var btn=el('button',{id:'iua-ab',type:'button','aria-label':'Account'});
   var am=el('div',{id:'iua-am',role:'dialog','aria-modal':'true'});
   var tst=el('div',{id:'iua-tst'});
