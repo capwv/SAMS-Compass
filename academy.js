@@ -31,8 +31,8 @@
     if(!tx)return;nClicks++;track('click',{target:tx});
   },true);
   /* ---------- progress snapshot / merge ---------- */
-  function isP(k){return /progress/i.test(k)&&!/^iua-/.test(k)}
-  function isL(k){return /(^|-)lab(-|$)/i.test(k)&&!/^iua-/.test(k)}
+  function isP(k){return /progress(-v\d+)?$/i.test(k)&&!/^iua-/.test(k)}
+  function isL(k){return /-lab-v\d+$/i.test(k)&&!/^iua-/.test(k)}
   function snap(){var p={},l={};try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(isP(k))p[k]=localStorage.getItem(k);else if(isL(k))l[k]=localStorage.getItem(k)}}catch(e){}return{p:p,l:l}}
   function stats(sn){var best=0,names=Object.keys(sn.p);for(var i=0;i<names.length;i++){var o=J(sn.p[names[i]]);if(o&&o.done){var n=0;for(var k in o.done)if(o.done[k])n++;if(n>best)best=n}}
     var t=document.getElementById('progress-text'),pct=0;if(t){var m=t.textContent.replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).match(/\d+/);if(m)pct=Math.min(100,+m[0])}
@@ -44,8 +44,10 @@
     for(k in loc.l)out.l[k]=loc.l[k];for(k in (rem.l||{}))if(!(k in out.l))out.l[k]=rem.l[k];return out}
   function same(a,b){return JSON.stringify(a)===JSON.stringify(b)}
   function norm(sn){var o={p:{},l:sn.l};for(var k in sn.p){var v=J(sn.p[k]);o.p[k]=v?JSON.stringify(v):sn.p[k]}return o}
-  var lastPushed='',pushT=0;
-  function push(force){if(!acct)return;var sn=snap(),s=JSON.stringify(sn);if(!force&&s===lastPushed)return;var st=stats(sn);lastPushed=s;
+  var lastPushed='',pushT=0,known=0,pulling=0;
+  function push(force){if(!acct)return;var sn=snap(),s=JSON.stringify(sn);if(!force&&s===lastPushed)return;var st=stats(sn);
+    if(st.lessons<known){if(!pulling){pulling=1;pull(function(){pulling=0})}return}
+    known=Math.max(known,st.lessons);lastPushed=s;
     rpc('app_save_progress',{p_token:acct.token,p_slug:slug,p_data:s,p_pct:st.pct,p_lessons:st.lessons},force).then(function(r){if(r&&r.error==='auth'){saveAcct(null);lastPushed='';ui()}else if(r&&r.error)lastPushed=''})}
   function schedule(){clearTimeout(pushT);pushT=setTimeout(function(){push()},1500)}
   Storage.prototype.setItem=function(k){setRaw.apply(this,arguments);if(this===localStorage&&(isP(k)||isL(k)))schedule()};
@@ -56,7 +58,7 @@
       if(r&&r.error==='auth'){saveAcct(null);ui();return cb&&cb(false)}
       if(!r||r.error)return cb&&cb(false);
       var it=null;(r.items||[]).forEach(function(x){if(x.slug===slug)it=x});
-      var rem=it&&J(it.data),loc=snap(),m=merge(loc,rem),changed=false,k;
+      var rem=it&&J(it.data),loc=snap(),m=merge(loc,rem),changed=false,k;if(it)known=Math.max(known,it.lessons||0);
       for(k in m.p)if(JSON.stringify(J(m.p[k]))!==JSON.stringify(J(loc.p[k])))changed=true;
       for(k in m.l)if(m.l[k]!==loc.l[k])changed=true;
       if(changed){for(k in m.p)put(k,m.p[k]);for(k in m.l)put(k,m.l[k]);
