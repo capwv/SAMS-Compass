@@ -34,7 +34,7 @@
   function isP(k){return /progress(-v\d+)?$/i.test(k)&&!/^iua-/.test(k)}
   function isL(k){return /-lab-v\d+$/i.test(k)&&!/^iua-/.test(k)}
   function snap(){var p={},l={};try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(isP(k))p[k]=localStorage.getItem(k);else if(isL(k))l[k]=localStorage.getItem(k)}}catch(e){}return{p:p,l:l}}
-  function stats(sn){var best=0,names=Object.keys(sn.p);for(var i=0;i<names.length;i++){var o=J(sn.p[names[i]]);if(o&&o.done){var n=0;for(var k in o.done)if(o.done[k])n++;if(n>best)best=n}}
+  function stats(sn){var best=0,names=Object.keys(sn.p),ids={},hasIds=0;[].forEach.call(document.querySelectorAll('.nav-item[data-id]'),function(e){ids[e.getAttribute('data-id')]=1;hasIds=1});for(var i=0;i<names.length;i++){if(ownKey&&names[i]!==ownKey)continue;var o=J(sn.p[names[i]]);if(o&&o.done){var n=0;for(var k in o.done)if(o.done[k]&&(ownKey||!hasIds||ids[k]))n++;if(n>best)best=n}}
     var t=document.getElementById('progress-text'),pct=0;if(t){var m=t.textContent.replace(/[٠-٩]/g,function(d){return '٠١٢٣٤٥٦٧٨٩'.indexOf(d)}).match(/\d+/);if(m)pct=Math.min(100,+m[0])}
     return{lessons:best,pct:pct}}
   function mergeP(a,b){if(!a)return b;if(!b)return a;var o={},k;for(k in b)o[k]=b[k];for(k in a)o[k]=a[k];o.done={};var x=[b.done||{},a.done||{}];for(var i=0;i<2;i++)for(k in x[i])if(x[i][k])o.done[k]=x[i][k];o.answers={};x=[b.answers||{},a.answers||{}];for(i=0;i<2;i++)for(k in x[i])o.answers[k]=x[i][k];return o}
@@ -50,7 +50,7 @@
     known=Math.max(known,st.lessons);lastPushed=s;
     rpc('app_save_progress',{p_token:acct.token,p_slug:slug,p_data:s,p_pct:st.pct,p_lessons:st.lessons},force).then(function(r){if(r&&r.error==='auth'){saveAcct(null);lastPushed='';ui()}else if(r&&r.error)lastPushed='';else schedStatus()})}
   function schedule(){clearTimeout(pushT);pushT=setTimeout(function(){push()},1500)}
-  Storage.prototype.setItem=function(k){setRaw.apply(this,arguments);if(this===localStorage&&(isP(k)||isL(k))){schedule();recLast()}};
+  var ownKey='';Storage.prototype.setItem=function(k){setRaw.apply(this,arguments);if(this===localStorage&&isP(k))ownKey=k;if(this===localStorage&&(isP(k)||isL(k))){schedule();recLast()}};
   setInterval(function(){if(acct)push()},4000);
   addEventListener('pagehide',function(){if(acct)push(true)});
   function pull(cb){if(!acct)return cb&&cb(false);
